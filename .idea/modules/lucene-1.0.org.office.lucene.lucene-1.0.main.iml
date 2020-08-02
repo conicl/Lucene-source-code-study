@@ -6,6 +6,7 @@
     <content url="file://$MODULE_DIR$/../../lucene-1.0/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../lucene-1.0/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../lucene-1.0/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../lucene-1.0/src/main/demo" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

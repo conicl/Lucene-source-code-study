@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Lucene-source-code-study.iml" filepath="$PROJECT_DIR$/.idea/Lucene-source-code-study.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lucene-source-code-study.org.office.lucene.lucene-1.0.iml" filepath="$PROJECT_DIR$/.idea/modules/Lucene-source-code-study.org.office.lucene.lucene-1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lucene-1.0.org.office.lucene.lucene-1.0.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lucene-1.0.org.office.lucene.lucene-1.0.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lucene-1.0.org.office.lucene.lucene-1.0.test.iml" filepath="$PROJECT_DIR$/.idea/modules/lucene-1.0.org.office.lucene.lucene-1.0.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.LrLucene.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.LrLucene.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.LrLucene.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.LrLucene.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.LrLucene.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.LrLucene.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.TestLrLucene.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.TestLrLucene.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.TestLrLucene.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.TestLrLucene.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.TestLrLucene.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.TestLrLucene.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.office.lucene.lucene-1.0.iml" filepath="$PROJECT_DIR$/.idea/modules/org.office.lucene.lucene-1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.office.lucene.lucene-1.0.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.office.lucene.lucene-1.0.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.office.lucene.lucene-1.0.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.office.lucene.lucene-1.0.test.iml" />
+    </modules>
+  </component>
+</project>
