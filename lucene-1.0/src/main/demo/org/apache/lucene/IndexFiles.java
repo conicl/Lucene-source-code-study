@@ -63,7 +63,7 @@ import java.util.Date;
 class IndexFiles {
   public static void main(String[] args) {
     try {
-
+        System.out.println(123);
       Date start = new Date();
 
       IndexWriter writer = new IndexWriter("index", new StopAnalyzer(), true);

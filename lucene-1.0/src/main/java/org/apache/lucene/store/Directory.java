@@ -70,6 +70,7 @@ import java.io.IOException;
   read, or deleted.  Random access is permitted when reading and writing.
 
     @author Doug Cutting
+
 */
 
 abstract public class Directory {

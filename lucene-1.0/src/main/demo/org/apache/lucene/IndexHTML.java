@@ -54,13 +54,16 @@ package org.apache.lucene;
  * <http://www.apache.org/>.
  */
 
-import com.lucene.analysis.StopAnalyzer;
-import com.lucene.index.*;
-import com.lucene.document.Document;
-import com.lucene.util.Arrays;
-import demo.HTMLParser.HTMLParser;
+
+import org.apache.lucene.analysis.StopAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.index.TermEnum;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Date;
 
 class IndexHTML {

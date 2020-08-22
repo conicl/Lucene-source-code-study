@@ -274,9 +274,9 @@ final class SegmentReader extends IndexReader {
 
   private final void closeNorms() throws IOException {
     synchronized (norms) {
-      Enumeration enum  = norms.elements();
-      while (enum.hasMoreElements()) {
-	Norm norm = (Norm)enum.nextElement();
+      Enumeration enum_  = norms.elements();
+      while (enum_.hasMoreElements()) {
+	Norm norm = (Norm)enum_.nextElement();
 	norm.in.close();
       }
     }

@@ -69,7 +69,7 @@ final public class FuzzyQuery extends MultiTermQuery {
     
     final void prepare(IndexReader reader) {
         try {
-            setEnum(new FuzzyTermEnum(reader, fuzzyTerm));
+            setenum_(new FuzzyTermEnum(reader, fuzzyTerm));
         } catch (IOException e) {}
     }
     

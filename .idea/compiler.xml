@@ -7,6 +7,8 @@
       <module name="org.example.LrLucene.main" target="1.8" />
       <module name="org.example.LrLucene.test" target="1.8" />
       <module name="org.example.TestLrLucene.test" target="1.8" />
+      <module name="org.office.lucene_1.lucene_1-1.0.main" target="1.8" />
+      <module name="org.office.lucene_1.lucene_1-1.0.test" target="1.8" />
       <module name="TestLrLucene.org.example.TestLrLucene.main" target="1.8" />
     </bytecodeTargetLevel>
   </component>

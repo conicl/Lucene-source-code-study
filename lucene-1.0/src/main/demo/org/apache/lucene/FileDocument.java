@@ -75,7 +75,7 @@ public class FileDocument {
     tokenized field;
     <li><code>modified</code>--containing the last modified date of the file as
     a keyword field as encoded by <a
-    href="lucene.document.DateField.html">DateField</a>; and
+    href="lucene_1.document.DateField.html">DateField</a>; and
     <li><code>contents</code>--containing the full contents of the file, as a
     Reader field;
     */

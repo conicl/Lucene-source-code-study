@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'org.office.lucene'
+group 'org.office.lucene_1'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8

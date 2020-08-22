@@ -57,6 +57,9 @@ package org.apache.lucene;
 import java.io.*;
 import com.lucene.document.*;
 import demo.HTMLParser.HTMLParser;
+import org.apache.lucene.document.DateField;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
 
 /** A utility for making Lucene Documents for HTML documents. */
 

@@ -110,12 +110,12 @@ final public class PrefixQuery extends Query {
   private BooleanQuery getQuery() throws IOException {
     if (query == null) {
       BooleanQuery q = new BooleanQuery();
-      TermEnum enum = reader.terms(prefix);
+      TermEnum enum_ = reader.terms(prefix);
       try {
 	String prefixText = prefix.text();
 	String prefixField = prefix.field();
 	do {
-	  Term term = enum.term();
+	  Term term = enum_.term();
 	  if (term != null &&
 	      term.text().startsWith(prefixText) &&
 	      term.field() == prefixField) {
@@ -126,9 +126,9 @@ final public class PrefixQuery extends Query {
 	  } else {
 	    break;
 	  }
-	} while (enum.next());
+	} while (enum_.next());
       } finally {
-	enum.close();
+	enum_.close();
       }
       query = q;
     }

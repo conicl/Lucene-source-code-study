@@ -68,7 +68,7 @@ import org.apache.lucene.index.IndexReader;
   </ul>
   <p>A parser for queries is contained in:
   <ul>
-  <li><a href="doc/lucene.queryParser.QueryParser.html">QueryParser</a>
+  <li><a href="doc/lucene_1.queryParser.QueryParser.html">QueryParser</a>
   </ul>
   */
 abstract public class Query {
@@ -94,7 +94,7 @@ abstract public class Query {
   /** Prints a query to a string, with <code>field</code> as the default field
     for terms.
     <p>The representation used is one that is readable by
-    <a href="doc/lucene.queryParser.QueryParser.html">QueryParser</a>
+    <a href="doc/lucene_1.queryParser.QueryParser.html">QueryParser</a>
     (although, if the query was created by the parser, the printed
     representation may not be exactly what was parsed). */
   abstract public String toString(String field);

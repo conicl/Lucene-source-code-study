@@ -69,7 +69,7 @@ final public class WildcardQuery extends MultiTermQuery {
 
     final void prepare(IndexReader reader) {
         try {
-            setEnum(new WildcardTermEnum(reader, wildcardTerm));
+            setenum_(new WildcardTermEnum(reader, wildcardTerm));
         } catch (IOException e) {}
     }
     

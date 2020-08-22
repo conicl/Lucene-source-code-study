@@ -68,7 +68,7 @@ final class TermInfosReader {
   private String segment;
   private FieldInfos fieldInfos;
 
-  private SegmentTermEnum enum;
+  private SegmentTermEnum enum_;
   private int size;
 
   TermInfosReader(Directory dir, String seg, FieldInfos fis)
@@ -77,15 +77,15 @@ final class TermInfosReader {
     segment = seg;
     fieldInfos = fis;
 
-    enum = new SegmentTermEnum(directory.openFile(segment + ".tis"),
+    enum_ = new SegmentTermEnum(directory.openFile(segment + ".tis"),
 			       fieldInfos, false);
-    size = enum.size;
+    size = enum_.size;
     readIndex();
   }
 
   final void close() throws IOException {
-    if (enum != null)
-      enum.close();
+    if (enum_ != null)
+      enum_.close();
   }
 
   /** Returns the number of term/value pairs in the set. */
@@ -137,7 +137,7 @@ final class TermInfosReader {
   }
 
   private final void seekEnum(int indexOffset) throws IOException {
-    enum.seek(indexPointers[indexOffset],
+    enum_.seek(indexPointers[indexOffset],
 	      (indexOffset * TermInfosWriter.INDEX_INTERVAL) - 1,
 	      indexTerms[indexOffset], indexInfos[indexOffset]);
   }
@@ -147,10 +147,10 @@ final class TermInfosReader {
     if (size == 0) return null;
     
     // optimize sequential access: first try scanning cached enum w/o seeking
-    if (enum.term() != null			  // term is at or past current
-	&& ((enum.prev != null && term.compareTo(enum.prev) > 0)
-	    || term.compareTo(enum.term()) >= 0)) { 
-      int enumOffset = (enum.position/TermInfosWriter.INDEX_INTERVAL)+1;
+    if (enum_.term() != null			  // term is at or past current
+	&& ((enum_.prev != null && term.compareTo(enum_.prev) > 0)
+	    || term.compareTo(enum_.term()) >= 0)) {
+      int enumOffset = (enum_.position/TermInfosWriter.INDEX_INTERVAL)+1;
       if (indexTerms.length == enumOffset	  // but before end of block
 	  || term.compareTo(indexTerms[enumOffset]) < 0)
 	return scanEnum(term);			  // no need to seek
@@ -163,9 +163,9 @@ final class TermInfosReader {
   
   /** Scans within block for matching term. */
   private final TermInfo scanEnum(Term term) throws IOException {
-    while (term.compareTo(enum.term()) > 0 && enum.next()) {}
-    if (enum.term() != null && term.compareTo(enum.term()) == 0)
-      return enum.termInfo();
+    while (term.compareTo(enum_.term()) > 0 && enum_.next()) {}
+    if (enum_.term() != null && term.compareTo(enum_.term()) == 0)
+      return enum_.termInfo();
     else
       return null;
   }
@@ -174,8 +174,8 @@ final class TermInfosReader {
   final synchronized Term get(int position) throws IOException {
     if (size == 0) return null;
 
-    if (enum != null && enum.term() != null && position >= enum.position &&
-	position < (enum.position + TermInfosWriter.INDEX_INTERVAL))
+    if (enum_ != null && enum_.term() != null && position >= enum_.position &&
+	position < (enum_.position + TermInfosWriter.INDEX_INTERVAL))
       return scanEnum(position);		  // can avoid seek
 
     seekEnum(position / TermInfosWriter.INDEX_INTERVAL); // must seek
@@ -183,11 +183,11 @@ final class TermInfosReader {
   }
 
   private final Term scanEnum(int position) throws IOException {
-    while(enum.position < position)
-      if (!enum.next())
+    while(enum_.position < position)
+      if (!enum_.next())
 	return null;
 
-    return enum.term();
+    return enum_.term();
   }
 
   /** Returns the position of a Term in the set or -1. */
@@ -197,25 +197,25 @@ final class TermInfosReader {
     int indexOffset = getIndexOffset(term);
     seekEnum(indexOffset);
 
-    while(term.compareTo(enum.term()) > 0 && enum.next()) {}
+    while(term.compareTo(enum_.term()) > 0 && enum_.next()) {}
 
-    if (term.compareTo(enum.term()) == 0)
-      return enum.position;
+    if (term.compareTo(enum_.term()) == 0)
+      return enum_.position;
     else
       return -1;
   }
 
   /** Returns an enumeration of all the Terms and TermInfos in the set. */
   final synchronized SegmentTermEnum terms() throws IOException {
-    if (enum.position != -1)			  // if not at start
+    if (enum_.position != -1)			  // if not at start
       seekEnum(0);				  // reset to start
-    return (SegmentTermEnum)enum.clone();
+    return (SegmentTermEnum)enum_.clone();
   }
 
   /** Returns an enumeration of terms starting at or after the named term. */
   final synchronized SegmentTermEnum terms(Term term) throws IOException {
     get(term);					  // seek enum to term
-    return (SegmentTermEnum)enum.clone();
+    return (SegmentTermEnum)enum_.clone();
   }
 
 
