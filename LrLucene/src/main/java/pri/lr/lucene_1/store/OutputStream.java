@@ -1,8 +1,6 @@
 package pri.lr.lucene_1.store;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
-import java.io.IOError;
 import java.io.IOException;
 
 /**
@@ -30,6 +28,11 @@ abstract public class OutputStream {
     }
 
     public final void writeInt(int i) throws IOException {
+        /**
+         *  ____ ____ ____ ____ ____ ____ ____ ____
+         *  先写高位
+         *  再写低位
+         */
         writeByte((byte) (i >> 24));
         writeByte((byte) (i >> 16));
         writeByte((byte) (i >> 8));
@@ -80,7 +83,7 @@ abstract public class OutputStream {
         }
     }
 
-    protected final void flush() throws IOException {
+    protected final void flush() throws IOException { // flush 是刷缓存
         flushBuffer(buffer, bufferPosition);
         bufferStart += bufferPosition;
         bufferPosition = 0;
@@ -98,7 +101,7 @@ abstract public class OutputStream {
 
     public void seek(long pos) throws IOException {
         flush();
-        bufferStart = pos;
+        bufferStart = pos; // ？？？ 直接等于？
     }
 
     abstract public long length() throws IOException;
