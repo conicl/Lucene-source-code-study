@@ -1,6 +1,7 @@
 package pri.lr.lucene_1.util;
 
 import pri.lr.lucene_1.store.Directory;
+import pri.lr.lucene_1.store.InputStream;
 import pri.lr.lucene_1.store.OutputStream;
 
 import java.io.IOException;
@@ -87,7 +88,22 @@ public class BitVector {
         }
     }
 
+    /**
+     *
+     * @param d
+     * @param name
+     * @throws IOException
+     */
     public BitVector(Directory d, String name) throws IOException {
+        InputStream input = d.openFile(name);
+        try {
+            size = input.readInt();
+            count = input.readInt();
+            bits = new byte[(size >> 3) + 1];
+            input.readBytes(bits, 0, bits.length);
+        } finally {
+            input.close();
+        }
 
     }
 
