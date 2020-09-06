@@ -241,3 +241,10 @@ final class FSOutputStream extends OutputStream {
         file.close();
     }
 }
+
+/*
+* DIRECTORIES map用于cache来保证每个path有唯一的实例
+* 可以在reader和writer之间同步
+*
+* openfile是直接创建？
+*/
