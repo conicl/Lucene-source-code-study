@@ -93,6 +93,7 @@ final class DocumentWriter {
       new FieldsWriter(directory, segment, fieldInfos);
     try {
       fieldsWriter.addDocument(doc);
+      
     } finally {
       fieldsWriter.close();
     }
@@ -143,32 +144,31 @@ final class DocumentWriter {
       int position = fieldLengths[fieldNumber];	  // position in field
 
       if (field.isIndexed()) {
-	if (!field.isTokenized()) {		  // un-tokenized field
-	  addPosition(fieldName, field.stringValue(), position++);
-	} else {
-	  Reader reader;			  // find or make Reader
-	  if (field.readerValue() != null)
-	    reader = field.readerValue();
-	  else if (field.stringValue() != null)
-	    reader = new StringReader(field.stringValue());
-	  else
-	    throw new IllegalArgumentException
-	      ("field must have either String or Reader value");
-
-	  // Tokenize field and add to postingTable
-	  TokenStream stream = analyzer.tokenStream(fieldName, reader);
-	  try {
-	    for (Token t = stream.next(); t != null; t = stream.next()) {
-	      addPosition(fieldName, t.termText(), position++);
-	      if (position > maxFieldLength) break;
-	    }
-	  } finally {
-	    stream.close();
-	  }
-	}
-
-	fieldLengths[fieldNumber] = position;	  // save field length
+          if (!field.isTokenized()) {		  // un-tokenized field
+              addPosition(fieldName, field.stringValue(), position++);
+          } else {
+              Reader reader;			  // find or make Reader
+              if (field.readerValue() != null)
+                  reader = field.readerValue();
+              else if (field.stringValue() != null)
+                  reader = new StringReader(field.stringValue());
+              else
+                  throw new IllegalArgumentException
+                          ("field must have either String or Reader value");
+              // Tokenize field and add to postingTable
+              TokenStream stream = analyzer.tokenStream(fieldName, reader);
+              try {
+                  for (Token t = stream.next(); t != null; t = stream.next()) {
+                      addPosition(fieldName, t.termText(), position++);
+                      if (position > maxFieldLength) break;
+                  }
+              } finally {
+                  stream.close();
+              }
+          }
+          fieldLengths[fieldNumber] = position;	  // save field length
       }
+
     }
   }
 
@@ -273,31 +273,30 @@ final class DocumentWriter {
       TermInfo ti = new TermInfo();
 
       for (int i = 0; i < postings.length; i++) {
-	Posting posting = postings[i];
+        Posting posting = postings[i];
 
 	// add an entry to the dictionary with pointers to prox and freq files
-	ti.set(1, freq.getFilePointer(), prox.getFilePointer());
-	tis.add(posting.term, ti);
+        ti.set(1, freq.getFilePointer(), prox.getFilePointer());
+        tis.add(posting.term, ti);
 	
 	// add an entry to the freq file
-	int f = posting.freq;
-	if (f == 1)				  // optimize freq=1
-	  freq.writeVInt(1);			  // set low bit of doc num.
-	else {
-	  freq.writeVInt(0);			  // the document number
-	  freq.writeVInt(f);			  // frequency in doc
-	}
-	
-	int lastPosition = 0;			  // write positions
-	int[] positions = posting.positions;
-	for (int j = 0; j < f; j++) {		  // use delta-encoding
-	  int position = positions[j];
-	  prox.writeVInt(position - lastPosition);
-	  lastPosition = position;
-	}
+
+        int f = posting.freq;
+        if (f == 1)				  // optimize freq=1
+          freq.writeVInt(1);			  // set low bit of doc num.
+        else {
+          freq.writeVInt(0);			  // the document number
+          freq.writeVInt(f);			  // frequency in doc
+        }
+        int lastPosition = 0;			  // write positions
+        int[] positions = posting.positions;
+        for (int j = 0; j < f; j++) {		  // use delta-encoding
+          int position = positions[j];
+          prox.writeVInt(position - lastPosition);
+          lastPosition = position;
+        }
       }
-    }
-    finally {
+    }finally {
       if (freq != null) freq.close();
       if (prox != null) prox.close();
       if (tis  != null)  tis.close();

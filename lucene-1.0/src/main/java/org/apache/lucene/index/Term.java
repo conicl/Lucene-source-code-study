@@ -70,7 +70,7 @@ public final class Term {
   public Term(String fld, String txt) {
     this(fld, txt, true);
   }
-  Term(String fld, String txt, boolean intern) {
+  public Term(String fld, String txt, boolean intern) {
     field = intern ? fld.intern() : fld;	  // field names are interned
     text = txt;					  // unless already known to be
   }
@@ -111,7 +111,7 @@ public final class Term {
   }
 
   /** Resets the field and text of a Term. */
-  final void set(String fld, String txt) {
+  public final void set(String fld, String txt) {
     field = fld;
     text = txt;
   }

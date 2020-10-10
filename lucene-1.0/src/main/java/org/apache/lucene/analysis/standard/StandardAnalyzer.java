@@ -60,7 +60,7 @@ import java.util.Hashtable;
 
 /** Filters {@link StandardTokenizer} with {@link StandardFilter}, {@link
  * LowerCaseFilter} and {@link StopFilter}. */
-public final class StandardAnalyzer extends Analyzer {
+public class StandardAnalyzer extends Analyzer {
   private Hashtable stopTable;
 
   /** An array containing some common English words that are not usually useful

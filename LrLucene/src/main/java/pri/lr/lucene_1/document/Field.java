@@ -10,8 +10,30 @@ import java.io.Reader;
  * Field可以选择性store到index中，被store的子段可以在查询中返回
  */
 public class Field {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private String name = "body";
+
+    public String getStringValue() {
+        return stringValue;
+    }
+
+    public void setStringValue(String stringValue) {
+        this.stringValue = stringValue;
+    }
+
     private String stringValue = null;
+
+    public Reader getReaderValue() {
+        return readerValue;
+    }
+
     private Reader readerValue = null;
     private boolean isStored = false;
     private boolean isIndexed = true;
