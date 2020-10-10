@@ -45,9 +45,40 @@ public class TermInfosWriter {
             throw new IOException("proxPointer out of order");
 
         if(!isIndex && size % INDEX_INTERVAL == 0) {
-            other.add(lastTerm, lastTi);
+            other.add(lastTerm, lastTi); // add an index term
         }
 
+        writeTerm(term);
+        output.writeVint(ti.docFreq);
+        output.writeVLong(ti.freqPointer - lastTi.freqPointer);
+        output.writeVLong(ti.proxPointer - lastTi.proxPointer);
+        if(isIndex) {
+            output.writeVLong(other.output.getFilePointer() - lastIndexPointer);
+            lastIndexPointer = other.output.getFilePointer();
+        }
+
+        lastTi.set(ti);
+        size++;
+    }
+
+    private void writeTerm(Term term) throws IOException{
+        int start = stringDifference(lastTerm.text, term.text);
+        int length = term.text.length() - start;
+
+        output.writeVint(start); // write shared prefix length
+        output.writeVint(length); // write delta length
+        output.writeChars(term.text, start, length);
+        output.writeVint(fieldsInfos.fieldNumber(term.field)); // write field num
+        lastTerm = term;
+    }
+
+    private int stringDifference(String text, String text1) {
+        int len = Math.min(text.length(), text1.length());
+        for(int i  = 0; i < len; i++) {
+            if (text.charAt(i) != text1.charAt(i))
+                return i;
+        }
+        return len;
     }
 
     public void close() throws IOException, SecurityException{
