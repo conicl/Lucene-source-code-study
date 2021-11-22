@@ -1,0 +1,45 @@
+package pri.lr.lucene_1.document;
+
+import java.util.Date;
+
+public class DateField {
+    private DateField(){}
+
+    private static int DATE_LEN = Long.toString(1000L * 365 * 24 * 60 * 60 * 1000, Character.MAX_RADIX).length();
+    public static String MIN_DATE_STRING() {
+        return timeToString(0);
+    }
+
+    public static String MAX_DATE_STRING() {
+        char[] buffer = new char[DATE_LEN];
+        char c = Character.forDigit(Character.MAX_RADIX - 1, Character.MAX_RADIX);
+        for (int i = 0; i < DATE_LEN; i++) {
+            buffer[i] = c;
+        }
+        return new String(buffer);
+    }
+
+    public static String dateToString(Date date) {
+        return timeToString(date.getTime());
+    }
+
+    // gu ding chang du
+    public static String timeToString(long time) {
+        if (time < 0 ) {
+            throw new RuntimeException("time too early!");
+        }
+
+        String s = Long.toString(time, Character.MAX_RADIX);
+        if (s.length() > DATE_LEN) {
+            throw new RuntimeException("time too late");
+        }
+
+        while(s.length() < DATE_LEN) {
+            s = "0" + s;
+        }
+        return s;
+    }
+
+
+
+}
